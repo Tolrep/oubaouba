@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,27 +30,44 @@ class Recipe
     private $name;
 
     /**
+     * @var string
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
      * @var int
      *
-     * @ORM\Column(name="time_to_make", type="integer")
+     * @ORM\Column(name="time_to_make", type="integer", nullable=true)
      */
     private $timeToMake;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="person_number", type="integer")
+     * @ORM\Column(name="person_number", type="integer", nullable=true)
      */
     private $personNumber;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Recipe", mappedBy="recipe", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ingredient", mappedBy="recipe", cascade={"persist", "remove"})
      */
     private $ingredients;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\IngredientValue", mappedBy="recipe", cascade={"persist", "remove"})
+     */
+    private $ingredientsValue;
+
+    /**
      * @return int
      */
+
+    public function __construct()
+    {
+        $this->ingredients = new ArrayCollection();
+        $this->ingredientsValue = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -127,4 +145,41 @@ class Recipe
         $this->ingredients = $ingredients;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIngredientsValue()
+    {
+        return $this->ingredientsValue;
+    }
+
+    /**
+     * @param mixed $ingredientsValue
+     * @return Recipe
+     */
+    public function setIngredientsValue($ingredientsValue)
+    {
+        $this->ingredientsValue = $ingredientsValue;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return Recipe
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
 }
+

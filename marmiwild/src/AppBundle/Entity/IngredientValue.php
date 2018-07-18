@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Ingredient
  *
- * @ORM\Table(name="ingredient")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\IngredientRepository")
+ * @ORM\Table(name="ingredient_value")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\IngredientValueRepository")
  */
-class Ingredient
+class IngredientValue
 {
     /**
      * @var int
@@ -22,14 +22,14 @@ class Ingredient
     private $id;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="value", type="decimal", precision=10, scale=2)
      */
-    private $name;
+    private $value;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Recipe", inversedBy="ingredients")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Recipe", inversedBy="ingredientsValue")
      * @ORM\JoinColumn(nullable=false)
      */
     private $recipe;
@@ -43,20 +43,20 @@ class Ingredient
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getName()
+    public function getValue()
     {
-        return $this->name;
+        return $this->value;
     }
 
     /**
-     * @param string $name
-     * @return Ingredient
+     * @param int $value
+     * @return IngredientValue
      */
-    public function setName($name)
+    public function setValue($value)
     {
-        $this->name = $name;
+        $this->value = $value;
         return $this;
     }
 
@@ -70,7 +70,7 @@ class Ingredient
 
     /**
      * @param mixed $recipe
-     * @return Ingredient
+     * @return IngredientValue
      */
     public function setRecipe($recipe)
     {

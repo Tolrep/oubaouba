@@ -6,12 +6,10 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Username</th>
-                <th>Password</th>
-                <th>EpicUsername</th>
-                <th>actions</th>
+                <th>Name</th>
+                <th>Temps (min)</th>
+                <th>Pour ... personne</th>
+                <th>Description</th>
             </tr>
         </thead>
         <tbody>
@@ -20,9 +18,7 @@
                 <td>{{ recipe.name }}</td>
                 <td>{{ recipe.timeToMake }}</td>
                 <td>{{ recipe.personNumber }}</td>
-                {% for ingredient in recipe.ingredients %}
-                <td>{{ ingredient.name }}, {{ ingredient.quantity }}</td>
-                {% endfor %}
+                <td>{{ recipe.description }}</td>
             </tr>
         {% else %}
             <tr>
