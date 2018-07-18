@@ -65,6 +65,12 @@ class Recipe
      */
     private $ingredientsValue;
 
+    public function __construct()
+    {
+        $this->ingredients = new ArrayCollection();
+        $this->ingredientsValue = new ArrayCollection();
+    }
+
     /**
      * @return int
      */
