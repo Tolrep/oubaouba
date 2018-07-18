@@ -15,7 +15,7 @@ class IngredientType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nom du produit: ',
+                'label' => 'Ingredient',
                 'attr' => ['maxlenght' => 45],
                 'constraints' => new NotBlank(['message' => 'Ce champs ne doit pas être vide']),
             ])

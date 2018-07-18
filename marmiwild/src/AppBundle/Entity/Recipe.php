@@ -36,6 +36,12 @@ class Recipe
     private $description;
 
     /**
+     * @var string
+     * @ORM\Column(name="instruction", type="text")
+     */
+    private $instruction;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="time_to_make", type="integer", nullable=true)
@@ -62,13 +68,6 @@ class Recipe
     /**
      * @return int
      */
-
-    public function __construct()
-    {
-        $this->ingredients = new ArrayCollection();
-        $this->ingredientsValue = new ArrayCollection();
-    }
-
     public function getId()
     {
         return $this->id;
@@ -181,5 +180,25 @@ class Recipe
         $this->description = $description;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getInstruction()
+    {
+        return $this->instruction;
+    }
+
+    /**
+     * @param string $instruction
+     * @return Recipe
+     */
+    public function setInstruction($instruction)
+    {
+        $this->instruction = $instruction;
+        return $this;
+    }
+
+
 }
 

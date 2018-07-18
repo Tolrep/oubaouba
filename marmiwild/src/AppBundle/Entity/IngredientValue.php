@@ -24,9 +24,15 @@ class IngredientValue
     /**
      * @var int
      *
-     * @ORM\Column(name="value", type="decimal", precision=10, scale=2)
+     * @ORM\Column(name="value", type="integer")
      */
     private $value;
+
+    /**
+     * @var int
+     * @ORM\Column(name="type", type="smallint")
+     */
+    private $type;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Recipe", inversedBy="ingredientsValue")
@@ -75,6 +81,24 @@ class IngredientValue
     public function setRecipe($recipe)
     {
         $this->recipe = $recipe;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     * @return IngredientValue
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
         return $this;
     }
 }
