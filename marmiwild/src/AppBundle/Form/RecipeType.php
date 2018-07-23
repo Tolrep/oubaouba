@@ -1,8 +1,10 @@
 <?php
 namespace AppBundle\Form;
 
+use AppBundle\Entity\IngredientValue;
 use AppBundle\Entity\Recipe;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -32,10 +34,11 @@ class RecipeType extends AbstractType
                 'label' => 'Temps de preparation (min)',
                 'constraints' => new NotBlank(['message' => 'Ce champs ne doit pas être vide']),
             ])
-            ->add('ingredients', IngredientType::class, [
-                'label' => false
+            ->add('ingredients', CollectionType::class, [
+                'entry_type' => IngredientType::class,
             ])
-            ->add('ingredientsValue', IngredientValueType::class, [
+            ->add('ingredientsValue', CollectionType::class, [
+                'entry_type' => IngredientValueType::class,
             ])
             ->add('instruction', TextareaType::class, [
                 'label' => 'Instruction de preparation',

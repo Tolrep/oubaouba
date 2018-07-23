@@ -57,11 +57,13 @@ class Recipe
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ingredient", mappedBy="recipe", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $ingredients;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\IngredientValue", mappedBy="recipe", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $ingredientsValue;
 
@@ -138,17 +140,19 @@ class Recipe
      */
     public function getIngredients()
     {
-        return $this->ingredients;
+        return $this->ingredients->toArray();
     }
 
     /**
      * @param mixed $ingredients
      * @return Recipe
      */
-    public function setIngredients($ingredients)
+    public function setIngredients(array $ingredients)
     {
-        $this->ingredients = $ingredients;
-        return $this;
+        foreach ($ingredients as $ingredient) {
+            $ingredient->setRecipe($this);
+        }
+        $this->ingredients = new ArrayCollection($ingredients);
     }
 
     /**
@@ -156,17 +160,19 @@ class Recipe
      */
     public function getIngredientsValue()
     {
-        return $this->ingredientsValue;
+        return $this->ingredientsValue->toArray();
     }
 
     /**
      * @param mixed $ingredientsValue
      * @return Recipe
      */
-    public function setIngredientsValue($ingredientsValue)
+    public function setIngredientsValue(array $ingredientsValue)
     {
-        $this->ingredientsValue = $ingredientsValue;
-        return $this;
+        foreach ($ingredientsValue as $ingredientValue) {
+            $ingredientValue->setRecipe($this);
+        }
+        $this->ingredientsValue = new ArrayCollection($ingredientsValue);
     }
 
     /**
